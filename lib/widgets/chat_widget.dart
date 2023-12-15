@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:message_app/models/ChatModel.dart';
+import 'package:message_app/routes_app.dart';
+import 'package:message_app/screens/chat_screen.dart';
 
 class ChatWidget extends StatefulWidget {
-  const ChatWidget({super.key});
+  final ChatModel chat;
+  const ChatWidget({super.key, required this.chat});
 
   @override
   State<ChatWidget> createState() => _ChatWidgetState();
@@ -10,37 +14,74 @@ class ChatWidget extends StatefulWidget {
 class _ChatWidgetState extends State<ChatWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 84,
-      margin: EdgeInsets.symmetric(horizontal: 16),
-      child: Row(children: [
-        Container(
-          height: 70,
-          width: 70,
-          color: Colors.black,
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    final ThemeData theme = Theme.of(context);
+
+    return GestureDetector(
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatScreen(chat: widget.chat),
+          )),
+      child: Container(
+        height: 84,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        child: Row(children: [
+          Container(
+            height: 56,
+            width: 56,
+            alignment: Alignment.center,
+            margin: const EdgeInsets.only(right: 16),
+            child: Image.asset(widget.chat.avatar),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    widget.chat.name,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+                SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      widget.chat.lastMessage.message,
+                      style: theme.textTheme.bodyMedium,
+                    )),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                "Nombre chat",
-                style: Theme.of(context).textTheme.bodyLarge,
+                widget.chat.lastMessage.date,
+                style: theme.textTheme.bodySmall,
               ),
-              Text("mensaje que se envio")
+              widget.chat.noRead == 0
+                  ? const SizedBox()
+                  : Container(
+                      width: 22,
+                      height: 22,
+                      margin: const EdgeInsets.only(top: 8),
+                      alignment: Alignment.center,
+                      decoration: const ShapeDecoration(
+                        shape: OvalBorder(),
+                        color: Color(0xff1B72C0),
+                      ),
+                      child: Text(
+                        widget.chat.noRead.toString(),
+                        style: theme.textTheme.bodySmall!
+                            .copyWith(color: Colors.white),
+                      ),
+                    )
             ],
-          ),
-        ),
-        Column(
-          children: [
-            Text("Fecha"),
-            Badge(
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              label: Text("2"),
-            )
-          ],
-        )
-      ]),
+          )
+        ]),
+      ),
     );
   }
 }

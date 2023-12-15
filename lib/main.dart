@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:message_app/routes_app.dart';
+import 'package:message_app/screens/chat_screen.dart';
 import 'package:message_app/screens/chats_screen.dart';
 import 'package:message_app/screens/contacts_screen.dart';
 import 'package:message_app/screens/setting_screen.dart';
@@ -15,8 +17,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blue, brightness: Brightness.light),
+        colorScheme: const ColorScheme.light(
+            primary: Color(0xff1B72C0),
+            primaryContainer: Color(0xFFD3E4FF),
+            onPrimaryContainer: Color(0xff001C38),
+            surface: Color(0xffF3F4F9),
+            surfaceVariant: Color(0xffEFF1F8),
+            background: Color(0xffFCFCFF)),
         textTheme: const TextTheme(
             bodyLarge: TextStyle(
               fontFamily: "Roboto",
@@ -34,11 +41,27 @@ class MyApp extends StatelessWidget {
             ),
             bodySmall: TextStyle(
               fontFamily: "Roboto",
-              fontSize: 14,
+              fontSize: 12,
               color: Color(0xFF74777F),
               fontWeight: FontWeight.w400,
               letterSpacing: 0.25,
+            ),
+            titleLarge: TextStyle(
+              fontFamily: "Roboto",
+              fontSize: 22,
+              color: Color(0xff001E2F),
+              fontWeight: FontWeight.w500,
             )),
+        useMaterial3: true,
+      ),
+      darkTheme: ThemeData(
+        colorScheme: const ColorScheme.dark(
+            primary: Color(0xffA2C9FF),
+            primaryContainer: Color(0xFF2F4156),
+            onPrimaryContainer: Color(0xffD7E2FF),
+            surface: Color(0xff13232C),
+            surfaceVariant: Color(0xff1E2A32),
+            background: Color(0xff0E181E)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -59,6 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return Scaffold(
       body: [ChatsScreen(), ContactsScreen(), SettingScreen()][_currentPage],
       floatingActionButton: FloatingActionButton(
@@ -67,6 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.edit_outlined),
       ),
       bottomNavigationBar: NavigationBar(
+          indicatorColor: theme.colorScheme.primaryContainer,
+          backgroundColor: theme.colorScheme.surface,
           onDestinationSelected: (int index) {
             setState(() {
               _currentPage = index;
