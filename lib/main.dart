@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
             onPrimaryContainer: Color(0xff001C38),
             surface: Color(0xffF3F4F9),
             surfaceVariant: Color(0xffEFF1F8),
-            background: Color(0xffFCFCFF)),
+            background: Color(0xffFCFCFF),
+            secondary: Color(0xff001E2F)),
         textTheme: const TextTheme(
             bodyLarge: TextStyle(
               fontFamily: "Roboto",
@@ -61,7 +62,8 @@ class MyApp extends StatelessWidget {
             onPrimaryContainer: Color(0xffD7E2FF),
             surface: Color(0xff13232C),
             surfaceVariant: Color(0xff1E2A32),
-            background: Color(0xff0E181E)),
+            background: Color(0xff0E181E),
+            secondary: Color(0xffE0F1FF)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
