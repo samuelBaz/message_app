@@ -6,8 +6,10 @@ class ChatModel {
   MessageModel lastMessage;
   String avatar;
   int noRead;
+  bool isSelected;
+  bool deleteIntent;
   List<MessageModel> messages;
 
   ChatModel(this.name, this.phone, this.lastMessage, this.avatar, this.noRead,
-      this.messages);
+      this.isSelected, this.deleteIntent, this.messages);
 }

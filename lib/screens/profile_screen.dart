@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:message_app/models/ChatModel.dart';
+import 'package:message_app/widgets/item_option.dart';
 
 class ProfileScreen extends StatefulWidget {
   final ChatModel chat;
@@ -137,49 +138,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500),
             ),
           ),
-          Container(
-            padding: EdgeInsets.all(16),
-            child: Row(children: [
-              Icon(Icons.image_outlined, color: theme.colorScheme.primary),
-              const SizedBox(
-                width: 16,
-              ),
-              Text(
-                "View media",
-                style: theme.textTheme.bodyLarge!
-                    .copyWith(color: theme.colorScheme.secondary),
-              )
-            ]),
-          ),
-          Container(
-            padding: EdgeInsets.all(16),
-            child: Row(children: [
-              Icon(Icons.search_outlined, color: theme.colorScheme.primary),
-              const SizedBox(
-                width: 16,
-              ),
-              Text(
-                "Search in conversation",
-                style: theme.textTheme.bodyLarge!
-                    .copyWith(color: theme.colorScheme.secondary),
-              )
-            ]),
-          ),
-          Container(
-            padding: EdgeInsets.all(16),
-            child: Row(children: [
-              Icon(Icons.notifications_outlined,
-                  color: theme.colorScheme.primary),
-              const SizedBox(
-                width: 16,
-              ),
-              Text(
-                "Notifications",
-                style: theme.textTheme.bodyLarge!
-                    .copyWith(color: theme.colorScheme.secondary),
-              )
-            ]),
-          ),
+          const ItemOption(icon: Icons.image_outlined, title: "View Media"),
+          const ItemOption(
+              icon: Icons.search_outlined, title: "Search in conversation"),
+          const ItemOption(
+              icon: Icons.notifications_outlined, title: "Notifications"),
         ],
       )),
     );

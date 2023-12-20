@@ -87,11 +87,13 @@ class _MyHomePageState extends State<MyHomePage> {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       body: [ChatsScreen(), ContactsScreen(), SettingScreen()][_currentPage],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
-        tooltip: 'Increment',
-        child: const Icon(Icons.edit_outlined),
-      ),
+      floatingActionButton: _currentPage == 2
+          ? const SizedBox()
+          : FloatingActionButton(
+              onPressed: () => {},
+              tooltip: 'Increment',
+              child: Icon(_currentPage == 0 ? Icons.edit_outlined : Icons.add),
+            ),
       bottomNavigationBar: NavigationBar(
           indicatorColor: theme.colorScheme.primaryContainer,
           backgroundColor: theme.colorScheme.surface,
