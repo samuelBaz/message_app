@@ -38,8 +38,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
       ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
         children: [
           Container(
             margin: EdgeInsets.only(left: 16, right: 16, bottom: 20),
@@ -61,20 +60,11 @@ class _ContactsScreenState extends State<ContactsScreen> {
                   EdgeInsets.symmetric(horizontal: 16)),
             ),
           ),
-          Expanded(
-            child: ListView(
-              children: contacts
-                  .map((contact) => ContactItem(contact: contact))
-                  .toList(),
-            ),
+          Column(
+            children: contacts
+                .map((contact) => ContactItem(contact: contact))
+                .toList(),
           )
-          // SizedBox.expand(
-          //   child: ListView(
-          //     children: contacts
-          //         .map((contact) => ContactItem(contact: contact))
-          //         .toList(),
-          //   ),
-          // )
         ],
       )),
     );

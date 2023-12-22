@@ -138,11 +138,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500),
             ),
           ),
-          const ItemOption(icon: Icons.image_outlined, title: "View Media"),
-          const ItemOption(
-              icon: Icons.search_outlined, title: "Search in conversation"),
-          const ItemOption(
-              icon: Icons.notifications_outlined, title: "Notifications"),
+          ItemOption(
+            icon: Icons.image_outlined,
+            title: "View Media",
+            callback: () => {},
+          ),
+          ItemOption(
+            icon: Icons.search_outlined,
+            title: "Search in conversation",
+            callback: () => {},
+          ),
+          ItemOption(
+            icon: Icons.notifications_outlined,
+            title: "Notifications",
+            callback: () => {},
+          ),
         ],
       )),
     );

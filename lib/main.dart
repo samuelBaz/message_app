@@ -3,6 +3,7 @@ import 'package:message_app/routes_app.dart';
 import 'package:message_app/screens/chat_screen.dart';
 import 'package:message_app/screens/chats_screen.dart';
 import 'package:message_app/screens/contacts_screen.dart';
+import 'package:message_app/screens/new_contact_screen.dart';
 import 'package:message_app/screens/setting_screen.dart';
 
 void main() {
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
             surface: Color(0xffF3F4F9),
             surfaceVariant: Color(0xffEFF1F8),
             background: Color(0xffFCFCFF),
-            secondary: Color(0xff001E2F)),
+            secondary: Color(0xff001E2F),
+            secondaryContainer: Color(0xff74777F)),
         textTheme: const TextTheme(
             bodyLarge: TextStyle(
               fontFamily: "Roboto",
@@ -63,7 +65,8 @@ class MyApp extends StatelessWidget {
             surface: Color(0xff13232C),
             surfaceVariant: Color(0xff1E2A32),
             background: Color(0xff0E181E),
-            secondary: Color(0xffE0F1FF)),
+            secondary: Color(0xffE0F1FF),
+            secondaryContainer: Color(0xffA8ADBD)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -86,12 +89,89 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
+      drawer: SafeArea(
+          child: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+                child: Column(
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  margin: const EdgeInsets.symmetric(vertical: 16),
+                  decoration: ShapeDecoration(
+                      shape: OvalBorder(), color: theme.colorScheme.primary),
+                ),
+                Text(
+                  "Message App",
+                  style: theme.textTheme.bodyLarge!.copyWith(
+                      color: theme.colorScheme.secondary,
+                      fontWeight: FontWeight.w500),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            )),
+            ListTile(
+              title: Text(
+                "Home",
+                style: theme.textTheme.bodyLarge!.copyWith(
+                    color: theme.colorScheme.secondary,
+                    fontWeight: FontWeight.w500),
+              ),
+              leading: Icon(Icons.home),
+              onTap: () {
+                setState(() {
+                  _currentPage = 0;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text(
+                "Contacts",
+                style: theme.textTheme.bodyLarge!.copyWith(
+                    color: theme.colorScheme.secondary,
+                    fontWeight: FontWeight.w500),
+              ),
+              leading: Icon(Icons.people_alt),
+              onTap: () {
+                setState(() {
+                  _currentPage = 1;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text(
+                "Settings",
+                style: theme.textTheme.bodyLarge!.copyWith(
+                    color: theme.colorScheme.secondary,
+                    fontWeight: FontWeight.w500),
+              ),
+              leading: Icon(Icons.settings_outlined),
+              onTap: () {
+                setState(() {
+                  _currentPage = 2;
+                });
+                Navigator.pop(context);
+              },
+            )
+          ],
+        ),
+      )),
       body: [ChatsScreen(), ContactsScreen(), SettingScreen()][_currentPage],
       floatingActionButton: _currentPage == 2
           ? const SizedBox()
           : FloatingActionButton(
-              onPressed: () => {},
-              tooltip: 'Increment',
+              onPressed: () {
+                if (_currentPage != 1) return;
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NewContactScreen(),
+                    ));
+              },
               child: Icon(_currentPage == 0 ? Icons.edit_outlined : Icons.add),
             ),
       bottomNavigationBar: NavigationBar(
